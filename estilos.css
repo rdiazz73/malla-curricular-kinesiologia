@@ -72,3 +72,25 @@ h1 {
   text-decoration: none;
   cursor: not-allowed;
 }
+
+.button {
+  background-color: #00b8d9; /* Caribbean blue */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 12px;
+  cursor: pointer;
+  margin: 10px 0 20px 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background-color: #009bb0; /* Más oscuro al pasar el mouse */
+  transform: scale(1.05);
+}
+
+button:active {
+  transform: scale(0.97);
+}
