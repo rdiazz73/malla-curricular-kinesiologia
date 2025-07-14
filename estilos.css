@@ -73,7 +73,7 @@ h1 {
   cursor: not-allowed;
 }
 
-.button {
+button {
   background-color: #00b8d9; /* Caribbean blue */
   color: white;
   border: none;
