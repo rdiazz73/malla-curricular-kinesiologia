@@ -1,22 +1,45 @@
+/* estilos.css */
+
 body {
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #e6f8f9;
-  color: #05445E;
+  font-family: Arial, sans-serif;
+  background-color: #e0f7fa;
+  color: #004d40;
   margin: 0;
   padding: 20px;
 }
 
 h1 {
   text-align: center;
-  color: #189AB4;
-  margin-bottom: 30px;
+  color: #006064;
 }
 
 #malla-container {
-  display: grid;
-  grid-template-columns: repeat(6, minmax(200px, 1fr));
-  gap: 16px;
-  padding: 20px;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: 20px;
+  padding-bottom: 20px;
+}
+
+.columna-semestre {
+  min-width: 250px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.columna-semestre h3 {
+  text-align: center;
+  background-color: #b2ebf2;
+  color: #006064;
+  padding: 8px;
+  border-radius: 6px;
+  margin: 0 0 10px;
 }
 
 .ramo {
@@ -37,6 +60,7 @@ h1 {
   background-color: #75E6DA;
   border-left: 6px solid #05445E;
   color: #00334E;
+  text-decoration: line-through;
 }
 
 .ramo.bloqueado {
