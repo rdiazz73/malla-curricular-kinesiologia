@@ -10,7 +10,7 @@ const malla = {
   "2° Semestre": [
     { nombre: "Fisiología general y neurofisiología", prerequisitos: ["Bases químico-biológicas de la célula"], abre: ["Fisiología de sistemas"] },
     { nombre: "Anatomía sistema musculo esquelético", prerequisitos: ["Anatomía de sistemas"], abre: [] },
-    { nombre: "Fundamentos del movimiento humano", prerequisitos: [] }, abre: ["Kinesiología y movimiento humano"] },
+    { nombre: "Fundamentos del movimiento humano", prerequisitos: [], abre: ["Kinesiología y movimiento humano"] },
     { nombre: "Desarrollo sensoriomotriz en kinesiología", prerequisitos: ["Corporalidad y actividad física"], abre: [] },
     { nombre: "Inglés I", abre: ["Inglés II"] }
   ],
