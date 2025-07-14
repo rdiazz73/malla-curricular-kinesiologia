@@ -104,14 +104,9 @@ function crearTarjeta(nombre, semestre) {
   div.className = "ramo";
   div.textContent = nombre;
   div.onclick = () => aprobarRamo(nombre);
-  estadoRamos[nombre] = { aprobado: false, element: div, bloqueado: tieneRequisitos(nombre) };
-  if (estadoRamos[nombre].bloqueado) div.classList.add("bloqueado");
+  estadoRamos[nombre] = { aprobado: false, element: div };
   const contenedor = document.getElementById(`col-${semestre}`);
   contenedor.appendChild(div);
-}
-
-function tieneRequisitos(nombre) {
-  return prerequisitos[nombre]?.length > 0;
 }
 
 function requisitosAprobados(nombre) {
@@ -126,7 +121,7 @@ function aprobarRamo(nombre) {
   ramo.element.classList.add("aprobado");
 
   Object.keys(estadoRamos).forEach(r => {
-    if (estadoRamos[r].bloqueado && requisitosAprobados(r)) {
+    if (prerequisitos[r] && requisitosAprobados(r)) {
       estadoRamos[r].bloqueado = false;
       estadoRamos[r].element.classList.remove("bloqueado");
     }
@@ -144,9 +139,17 @@ function crearMalla() {
     const titulo = document.createElement("h3");
     titulo.textContent = semestre;
     col.appendChild(titulo);
+    mallaContainer.appendChild(col); // << IMPORTANTE: primero agregamos la columna al DOM
 
     ramos[semestre].forEach(nombre => crearTarjeta(nombre, i));
-    mallaContainer.appendChild(col);
+  });
+
+  // Segunda pasada: bloqueo por requisitos
+  Object.keys(estadoRamos).forEach(nombre => {
+    if (!requisitosAprobados(nombre)) {
+      estadoRamos[nombre].bloqueado = true;
+      estadoRamos[nombre].element.classList.add("bloqueado");
+    }
   });
 }
 
