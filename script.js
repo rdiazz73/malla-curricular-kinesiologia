@@ -1,16 +1,16 @@
 const malla = {
   "1° Semestre": [
     { nombre: "Rehabilitación e inclusión con enfoque de derechos humanos", abre: ["Diagnostico interdisciplinario en rehabilitación con perspectiva inclusiva"] },
-    { nombre: "Bases químico-biológicas de la célcula", abre: ["Fisiología general y neurofisiología"] },
+    { nombre: "Bases químico-biológicas de la célula", abre: ["Fisiología general y neurofisiología"] },
     { nombre: "Anatomía de sistemas", abre: ["Anatomía sistema musculo esquelético"] },
     { nombre: "Corporalidad y actividad física", abre: ["Desarrollo sensoriomotriz en kinesiología"] },
     { nombre: "Fundamentos de kinesiología", abre: [] },
     { nombre: "Habilidades comunicativas", abre: ["Pensamiento crítico"] }
   ],
   "2° Semestre": [
-    { nombre: "Fisiología general y neurofisiología", prerequisitos: ["Bases químico-biológicas de la célcula"], abre: ["Fisiología de sistemas"] },
+    { nombre: "Fisiología general y neurofisiología", prerequisitos: ["Bases químico-biológicas de la célula"], abre: ["Fisiología de sistemas"] },
     { nombre: "Anatomía sistema musculo esquelético", prerequisitos: ["Anatomía de sistemas"], abre: [] },
-    { nombre: "Fundamentos del movimiento humano", abre: ["Kinesiología y movimiento humano"] },
+    { nombre: "Fundamentos del movimiento humano", prerequisitos: [] }, abre: ["Kinesiología y movimiento humano"] },
     { nombre: "Desarrollo sensoriomotriz en kinesiología", prerequisitos: ["Corporalidad y actividad física"], abre: [] },
     { nombre: "Inglés I", abre: ["Inglés II"] }
   ],
@@ -41,7 +41,7 @@ const malla = {
     { nombre: "Evaluación y diagnóstico en kinesiología musculo esquelético", prerequisitos: ["Ciclo vital y funcionamiento humano", "Integración en kinesiología I"], abre: ["Intervención en kinesiología musculo esquelética"] },
     { nombre: "Evaluación y diagnostico en neurokinesiologia", prerequisitos: ["Ciclo vital y funcionamiento humano", "Integración en kinesiología I"], abre: ["Intervención en neurokinesiologia"] },
     { nombre: "Atencion primaria y salud familiar", prerequisitos: ["Políticas en rehabilitación e inclusión"], abre: [] },
-    { nombre: "Pensamiento crítico", prerequisitos: ["Habilidades comunicativas", "Análisis cualitativo y cuantitativo"], abre: ["Proceso investigativo para licenciatura I"] }
+    { nombre: "Pensamiento crítico", prerequisitos: ["Habilidades comunicativas"], abre: ["Proceso investigativo para licenciatura I"] }
   ],
   "7° Semestre": [
     { nombre: "Agentes físicos", abre: [] },
