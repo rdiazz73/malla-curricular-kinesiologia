@@ -97,7 +97,6 @@ const prerequisitos = {
   "Proyecto investigativo para licenciatura II": ["Proceso investigativo para licenciatura I"]
 };
 
-const mallaContainer = document.getElementById("malla-container");
 const estadoRamos = {};
 
 function crearTarjeta(nombre, semestre) {
@@ -135,6 +134,8 @@ function aprobarRamo(nombre) {
 }
 
 function crearMalla() {
+  const mallaContainer = document.getElementById("malla-container");
+
   Object.keys(ramos).forEach((semestre, i) => {
     const col = document.createElement("div");
     col.className = "columna-semestre";
