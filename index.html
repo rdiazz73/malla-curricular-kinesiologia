@@ -2,13 +2,33 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Malla Interactiva de Kinesiología</title>
   <link rel="stylesheet" href="estilos.css" />
 </head>
 <body>
   <h1>Malla Interactiva de Kinesiología</h1>
-  <div id="malla-container"></div>
+  <p style="text-align:center; max-width: 800px; margin: auto; color: #004d40;">
+    Haz clic en los ramos para marcarlos como aprobados. Los ramos que dependen de otros se desbloquearán automáticamente cuando cumplas con todos sus prerrequisitos. La malla está organizada por año y semestre para facilitar tu planificación académica.
+  </p>
+
+  <div style="text-align:center; margin: 20px 0;">
+  <strong>Leyenda:</strong>
+  <div style="display: flex; justify-content: center; gap: 20px; margin-top: 10px;">
+    <div style="display:flex; align-items:center; gap:5px;">
+      <div style="width: 20px; height: 20px; background-color: #D4F1F4; border-left: 4px solid #189AB4; border-radius: 5px;"></div> Pendiente
+    </div>
+    <div style="display:flex; align-items:center; gap:5px;">
+      <div style="width: 20px; height: 20px; background-color: #75E6DA; border-left: 4px solid #05445E; border-radius: 5px;"></div> Aprobado
+    </div>
+    <div style="display:flex; align-items:center; gap:5px;">
+      <div style="width: 20px; height: 20px; background-color: #D4F1F4; opacity: 0.5; border-left: 4px solid #189AB4; border-radius: 5px;"></div> Bloqueado
+    </div>
+  </div>
+</div>
+
+<div id="malla-container"></div>
+
   <script src="script.js"></script>
 </body>
 </html>
