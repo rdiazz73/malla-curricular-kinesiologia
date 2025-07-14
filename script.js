@@ -1,15 +1,14 @@
-// Lista de todos los ramos organizados por semestre con sus prerrequisitos
 const malla = {
   "1° Semestre": [
     { nombre: "Rehabilitación e inclusión con enfoque de derechos humanos", abre: ["Diagnostico interdisciplinario en rehabilitación con perspectiva inclusiva"] },
-    { nombre: "Bases químico-biológicas de la célula", abre: ["Fisiología general y neurofisiología"] },
+    { nombre: "Bases químico-biológicas de la célcula", abre: ["Fisiología general y neurofisiología"] },
     { nombre: "Anatomía de sistemas", abre: ["Anatomía sistema musculo esquelético"] },
     { nombre: "Corporalidad y actividad física", abre: ["Desarrollo sensoriomotriz en kinesiología"] },
     { nombre: "Fundamentos de kinesiología", abre: [] },
     { nombre: "Habilidades comunicativas", abre: ["Pensamiento crítico"] }
   ],
   "2° Semestre": [
-    { nombre: "Fisiología general y neurofisiología", prerequisitos: ["Bases químico-biológicas de la célula"], abre: ["Fisiología de sistemas"] },
+    { nombre: "Fisiología general y neurofisiología", prerequisitos: ["Bases químico-biológicas de la célcula"], abre: ["Fisiología de sistemas"] },
     { nombre: "Anatomía sistema musculo esquelético", prerequisitos: ["Anatomía de sistemas"], abre: [] },
     { nombre: "Fundamentos del movimiento humano", abre: ["Kinesiología y movimiento humano"] },
     { nombre: "Desarrollo sensoriomotriz en kinesiología", prerequisitos: ["Corporalidad y actividad física"], abre: [] },
@@ -50,7 +49,7 @@ const malla = {
     { nombre: "Intervención en kinesiología musculo esquelética", prerequisitos: ["Evaluación y diagnóstico en kinesiología musculo esquelético"], abre: [] },
     { nombre: "Intervención en neurokinesiologia", prerequisitos: ["Evaluación y diagnostico en neurokinesiologia"], abre: [] },
     { nombre: "Administración y gestión en salud", abre: [] },
-    { nombre: "Proceso investigativo para licenciatura I", prerequisitos: ["Pensamiento crítico", "Análisis cualitativo y cuantitativo"], abre: ["Proceso investigativo para licenciatura II"] }
+    { nombre: "Proceso investigativo para licenciatura I", prerequisitos: ["Pensamiento crítico", "Análisis cualitativo y cuantitativo"], abre: ["Proyecto investigativo para licenciatura II"] }
   ],
   "8° Semestre": [
     { nombre: "Intervención interdisciplinaria en rehabilitación con perspectiva inclusiva", prerequisitos: ["Diagnostico interdisciplinario en rehabilitación con perspectiva inclusiva"], abre: [] },
@@ -74,6 +73,7 @@ const aprobados = new Set();
 
 window.onload = () => {
   const container = document.getElementById("malla-container");
+  container.innerHTML = "";
 
   for (const [semestre, ramos] of Object.entries(malla)) {
     const columna = document.createElement("div");
@@ -89,15 +89,16 @@ window.onload = () => {
       div.textContent = ramo.nombre;
       div.dataset.nombre = ramo.nombre;
 
-      // Verificamos si debe estar bloqueado
-      if (ramo.prerequisitos && ramo.prerequisitos.length > 0 && !ramo.prerequisitos.every(req => aprobados.has(req))) {
+      if (ramo.prerequisitos && !ramo.prerequisitos.every(req => aprobados.has(req))) {
         div.classList.add("bloqueado");
       }
 
       div.addEventListener("click", () => {
         if (div.classList.contains("bloqueado")) return;
 
-        const aprobado = div.classList.toggle("aprobado");
+        div.classList.toggle("aprobado");
+        const aprobado = div.classList.contains("aprobado");
+
         if (aprobado) {
           aprobados.add(ramo.nombre);
         } else {
@@ -117,14 +118,16 @@ window.onload = () => {
 function actualizarBloqueos() {
   document.querySelectorAll(".ramo").forEach(div => {
     const nombre = div.dataset.nombre;
-    let prerequisites = [];
+    let prerequisitos = [];
 
     for (const ramos of Object.values(malla)) {
       const ramo = ramos.find(r => r.nombre === nombre);
-      if (ramo && ramo.prerequisitos) prerequisites = ramo.prerequisitos;
+      if (ramo && ramo.prerequisitos) {
+        prerequisitos = ramo.prerequisitos;
+      }
     }
 
-    const todosCumplidos = prerequisites.every(req => aprobados.has(req));
+    const todosCumplidos = prerequisitos.every(req => aprobados.has(req));
 
     if (todosCumplidos) {
       div.classList.remove("bloqueado");
