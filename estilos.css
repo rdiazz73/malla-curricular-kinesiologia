@@ -1,291 +1,69 @@
-:root {
-    --caribbean-blue: #00A4CC;
-    --dark-blue: #0077A3;
-    --light-blue: #66C4E0;
-    --lighter-blue: #B3E0F2;
-    --lightest-blue: #E6F7FF;
-    --white: #FFFFFF;
-    --gray: #F5F5F5;
-    --dark-gray: #333333;
-    --green: #4CAF50;
-    --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+/* estilos.css */
 
 body {
-    font-family: 'Open Sans', sans-serif;
-    line-height: 1.6;
-    color: var(--dark-gray);
-    background-color: var(--lightest-blue);
-    padding: 20px;
-}
-
-header {
-    text-align: center;
-    margin-bottom: 30px;
-    padding: 20px;
-    background-color: var(--white);
-    border-radius: 8px;
-    box-shadow: var(--shadow);
+  font-family: Arial, sans-serif;
+  background-color: #e0f7fa;
+  color: #004d40;
+  margin: 0;
+  padding: 20px;
 }
 
 h1 {
-    color: var(--dark-blue);
-    margin-bottom: 20px;
+  text-align: center;
+  color: #006064;
 }
 
-.controls {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 20px;
-    margin-top: 20px;
+#malla-container {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: 20px;
+  padding-bottom: 20px;
 }
 
-#reset-btn {
-    background-color: var(--caribbean-blue);
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: background-color 0.3s;
+.columna-semestre {
+  min-width: 250px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-#reset-btn:hover {
-    background-color: var(--dark-blue);
+.columna-semestre h3 {
+  text-align: center;
+  background-color: #b2ebf2;
+  color: #006064;
+  padding: 8px;
+  border-radius: 6px;
+  margin: 0 0 10px;
 }
 
-.progress-container {
-    flex-grow: 1;
-    max-width: 300px;
+.ramo {
+  background-color: #D4F1F4;
+  border-left: 6px solid #189AB4;
+  border-radius: 12px;
+  padding: 10px;
+  box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.progress-bar {
-    height: 20px;
-    background-color: var(--gray);
-    border-radius: 10px;
-    overflow: hidden;
-    margin-bottom: 5px;
-    position: relative;
+.ramo:hover {
+  background-color: #BEE9F1;
 }
 
-.progress-fill {
-    height: 100%;
-    width: 0%;
-    background-color: var(--green);
-    transition: width 0.5s ease;
+.ramo.aprobado {
+  background-color: #75E6DA;
+  border-left: 6px solid #05445E;
+  color: #00334E;
+  text-decoration: line-through;
 }
 
-#progress-text {
-    font-size: 14px;
-    color: var(--dark-gray);
-}
-
-.semesters-container {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-}
-
-.semester {
-    background-color: var(--white);
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: var(--shadow);
-}
-
-.semester-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid var(--light-blue);
-}
-
-.semester-title {
-    color: var(--dark-blue);
-    font-size: 1.5rem;
-    font-weight: 700;
-}
-
-.semester-year {
-    background-color: var(--light-blue);
-    color: white;
-    padding: 5px 10px;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    font-weight: 600;
-}
-
-.courses-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 15px;
-}
-
-.course {
-    background-color: var(--lighter-blue);
-    border-radius: 6px;
-    padding: 15px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-    border-left: 5px solid var(--caribbean-blue);
-}
-
-.course:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-}
-
-.course.completed {
-    background-color: var(--caribbean-blue);
-    color: white;
-}
-
-.course.unlocked:not(.completed) {
-    background-color: var(--white);
-    border-left: 5px solid var(--light-blue);
-}
-
-.course.locked {
-    background-color: var(--gray);
-    color: #999;
-    cursor: not-allowed;
-    border-left: 5px solid #ccc;
-}
-
-.course-name {
-    font-weight: 600;
-    margin-bottom: 5px;
-}
-
-.course-status {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    font-size: 0.7rem;
-    font-weight: bold;
-    padding: 2px 5px;
-    border-radius: 3px;
-}
-
-.completed .course-status {
-    background-color: var(--white);
-    color: var(--caribbean-blue);
-}
-
-.unlocked .course-status {
-    background-color: var(--light-blue);
-    color: white;
-}
-
-.locked .course-status {
-    background-color: #ccc;
-    color: #666;
-}
-
-/* Modal styles */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 100;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    overflow: auto;
-}
-
-.modal-content {
-    background-color: var(--white);
-    margin: 5% auto;
-    padding: 25px;
-    border-radius: 8px;
-    width: 90%;
-    max-width: 600px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    position: relative;
-}
-
-.close-modal {
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    font-size: 28px;
-    font-weight: bold;
-    color: #aaa;
-    cursor: pointer;
-}
-
-.close-modal:hover {
-    color: var(--dark-gray);
-}
-
-.modal-body {
-    margin-top: 20px;
-}
-
-.modal-body h3 {
-    margin: 15px 0 10px;
-    color: var(--dark-blue);
-}
-
-.modal-body ul {
-    padding-left: 20px;
-    margin-bottom: 15px;
-}
-
-.modal-body li {
-    margin-bottom: 5px;
-}
-
-.complete-btn {
-    background-color: var(--caribbean-blue);
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: background-color 0.3s;
-    margin-top: 15px;
-    width: 100%;
-}
-
-.complete-btn:hover {
-    background-color: var(--dark-blue);
-}
-
-/* Responsive design */
-@media (max-width: 768px) {
-    .semester-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-    }
-    
-    .courses-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .controls {
-        flex-direction: column;
-        align-items: stretch;
-    }
-    
-    .progress-container {
-        max-width: 100%;
-    }
+.ramo.bloqueado {
+  opacity: 0.5;
+  pointer-events: none;
 }
