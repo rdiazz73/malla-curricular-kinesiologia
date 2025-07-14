@@ -1,17 +1,3 @@
-.progress-bar {
-    --progress: 0%;
-    position: relative;
-}
-.progress-bar::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: var(--progress);
-    background-color: #4CAF50;
-    transition: width 0.5s ease;
-}
 document.addEventListener('DOMContentLoaded', function() {
     // Datos de la malla curricular
     const curriculumData = [
@@ -349,9 +335,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Estado de los cursos
     let coursesState = {};
     let totalCourses = 0;
+    let currentModalCourse = null;
     
     // Inicializar el estado de los cursos
     function initializeCoursesState() {
+        totalCourses = 0;
         curriculumData.forEach(year => {
             year.semesters.forEach(semester => {
                 semester.courses.forEach(course => {
@@ -367,7 +355,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Renderizar la malla curricular
     function renderCurriculum() {
-        const container = document.querySelector('.semesters-container');
+        const container = document.getElementById('semesters-container');
         container.innerHTML = '';
 
         curriculumData.forEach(year => {
@@ -434,12 +422,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Manejar clic en un curso
     function handleCourseClick(course) {
-        // Si el curso está bloqueado, no hacer nada
-        if (!coursesState[course.name].unlocked || coursesState[course.name].completed) {
-            return;
-        }
-        
-        // Mostrar modal con información del curso
+        currentModalCourse = course;
         showCourseModal(course);
     }
 
@@ -450,6 +433,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const modalDescription = document.getElementById('modal-description');
         const modalRequirements = document.getElementById('modal-requirements');
         const modalUnlocks = document.getElementById('modal-unlocks');
+        const completeBtn = document.getElementById('complete-btn');
         
         modalTitle.textContent = course.name;
         modalDescription.textContent = `Curso del ${getSemesterAndYear(course.name)}`;
@@ -495,38 +479,19 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
         
+        // Configurar botón de completar
+        if (coursesState[course.name].unlocked && !coursesState[course.name].completed) {
+            completeBtn.style.display = 'block';
+            completeBtn.onclick = function() {
+                completeCourse(course);
+                modal.style.display = 'none';
+            };
+        } else {
+            completeBtn.style.display = 'none';
+        }
+        
         // Mostrar modal
         modal.style.display = 'block';
-        
-        // Configurar botón de cerrar
-        document.querySelector('.close-modal').onclick = function() {
-            modal.style.display = 'none';
-        }
-        
-        // Cerrar modal al hacer clic fuera
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = 'none';
-            }
-        }
-        
-        // Configurar botón de completar curso (si está desbloqueado y no completado)
-        const completeButton = document.createElement('button');
-        completeButton.textContent = "Marcar como aprobado";
-        completeButton.className = 'complete-btn';
-        completeButton.onclick = function() {
-            completeCourse(course);
-            modal.style.display = 'none';
-        };
-        
-        // Limpiar botones anteriores
-        const oldButton = document.querySelector('.modal-body .complete-btn');
-        if (oldButton) oldButton.remove();
-        
-        // Agregar botón solo si el curso está desbloqueado y no completado
-        if (coursesState[course.name].unlocked && !coursesState[course.name].completed) {
-            document.querySelector('.modal-body').appendChild(completeButton);
-        }
     }
 
     // Obtener semestre y año de un curso
@@ -600,20 +565,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         const percentage = Math.round((completedCount / totalCourses) * 100);
         document.getElementById('progress-text').textContent = `${percentage}% completado`;
-        document.querySelector('.progress-bar::after').style.width = `${percentage}%`;
-        
-        // Actualizar el pseudo-elemento
-        const progressBar = document.querySelector('.progress-bar');
-        progressBar.style.setProperty('--progress', `${percentage}%`);
-        
-        // Agregar estilo dinámico para el pseudo-elemento
-        const style = document.createElement('style');
-        style.innerHTML = `
-            .progress-bar::after {
-                width: var(--progress);
-            }
-        `;
-        document.head.appendChild(style);
+        document.getElementById('progress-fill').style.width = `${percentage}%`;
     }
 
     // Reiniciar todo
@@ -627,10 +579,30 @@ document.addEventListener('DOMContentLoaded', function() {
         renderCurriculum();
     }
 
-    // Configurar botón de reinicio
-    document.getElementById('reset-btn').addEventListener('click', resetAll);
+    // Configurar eventos
+    function setupEventListeners() {
+        // Botón de reinicio
+        document.getElementById('reset-btn').addEventListener('click', resetAll);
+        
+        // Cerrar modal
+        document.querySelector('.close-modal').addEventListener('click', function() {
+            document.getElementById('course-modal').style.display = 'none';
+        });
+        
+        // Cerrar modal al hacer clic fuera
+        window.addEventListener('click', function(event) {
+            if (event.target == document.getElementById('course-modal')) {
+                document.getElementById('course-modal').style.display = 'none';
+            }
+        });
+    }
 
     // Inicializar
-    initializeCoursesState();
-    renderCurriculum();
+    function init() {
+        initializeCoursesState();
+        setupEventListeners();
+        renderCurriculum();
+    }
+
+    init();
 });
