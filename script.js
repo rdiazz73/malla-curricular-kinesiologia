@@ -1,3 +1,17 @@
+.progress-bar {
+    --progress: 0%;
+    position: relative;
+}
+.progress-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: var(--progress);
+    background-color: #4CAF50;
+    transition: width 0.5s ease;
+}
 document.addEventListener('DOMContentLoaded', function() {
     // Datos de la malla curricular
     const curriculumData = [
