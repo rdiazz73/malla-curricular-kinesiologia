@@ -64,11 +64,11 @@ h1 {
   background-color: #4dd0e1;
   color: white;
   font-weight: bold;
+  text-decoration: line-through;
 }
 
 .ramo.bloqueado {
   background-color: #e0e0e0;
   color: #888;
   cursor: not-allowed;
-  text-decoration: line-through;
 }
