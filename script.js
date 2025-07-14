@@ -69,7 +69,7 @@ const malla = {
   ]
 };
 
-const aprobados = new Set();
+const aprobados = new Set(JSON.parse(localStorage.getItem("aprobados")) || []);
 
 window.onload = () => {
   const container = document.getElementById("malla-container");
@@ -96,6 +96,10 @@ window.onload = () => {
         div.classList.add("bloqueado");
       }
 
+      if (aprobados.has(ramo.nombre)) {
+        div.classList.add("aprobado");
+      }
+
       div.addEventListener("click", () => {
         if (div.classList.contains("bloqueado")) return;
 
@@ -108,6 +112,8 @@ window.onload = () => {
           aprobados.delete(ramo.nombre);
         }
 
+        localStorage.setItem("aprobados", JSON.stringify(Array.from(aprobados)));
+
         actualizarBloqueos();
       });
 
@@ -116,6 +122,8 @@ window.onload = () => {
 
     container.appendChild(columna);
   }
+
+  actualizarBloqueos();
 };
 
 function actualizarBloqueos() {
@@ -139,4 +147,13 @@ function actualizarBloqueos() {
       aprobados.delete(nombre);
     }
   });
+
+  localStorage.setItem("aprobados", JSON.stringify(Array.from(aprobados)));
+}
+
+function reiniciarProgreso() {
+  if (confirm("¿Estás seguro de que quieres reiniciar todo el progreso?")) {
+    localStorage.removeItem("aprobados");
+    location.reload();
+  }
 }
