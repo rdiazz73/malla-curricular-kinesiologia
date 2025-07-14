@@ -1,57 +1,45 @@
 body {
-  font-family: Arial, sans-serif;
-  background-color: #e6f9ff;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #e6f8f9;
+  color: #05445E;
+  margin: 0;
   padding: 20px;
-  color: #003b5c;
 }
 
 h1 {
   text-align: center;
+  color: #189AB4;
   margin-bottom: 30px;
-  color: #007ca6;
 }
 
-.semestre {
-  margin-bottom: 40px;
-}
-
-h2 {
-  background-color: #b3ecff;
-  padding: 10px;
-  border-left: 5px solid #007ca6;
-  border-radius: 5px;
-}
-
-.malla {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
+#malla-container {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(200px, 1fr));
+  gap: 16px;
+  padding: 20px;
 }
 
 .ramo {
-  background-color: #ccefff;
-  border: 2px solid #007ca6;
-  border-radius: 8px;
-  padding: 12px;
-  width: 250px;
+  background-color: #D4F1F4;
+  border-left: 6px solid #189AB4;
+  border-radius: 12px;
+  padding: 10px;
+  box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
   cursor: pointer;
-  transition: all 0.2s ease-in-out;
+  transition: background-color 0.3s ease;
 }
 
 .ramo:hover {
-  background-color: #b3e5ff;
-  transform: scale(1.02);
-}
-
-.ramo.bloqueado {
-  background-color: #e0e0e0;
-  border-color: #a0a0a0;
-  color: #666;
-  cursor: not-allowed;
+  background-color: #BEE9F1;
 }
 
 .ramo.aprobado {
-  background-color: #4dd0e1;
-  border-color: #00838f;
-  color: white;
+  background-color: #75E6DA;
+  border-left: 6px solid #05445E;
+  color: #00334E;
+}
+
+.ramo.bloqueado {
+  opacity: 0.5;
+  pointer-events: none;
 }
