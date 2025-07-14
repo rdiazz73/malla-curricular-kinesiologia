@@ -36,7 +36,7 @@ const malla = {
     { nombre: "Inglés IV", prerequisitos: ["Inglés III"], abre: [] }
   ],
   "6° Semestre": [
-    { nombre: "Diagnostico interdisciplinario en rehabilitación con perspectiva inclusiva", prerequisitos: ["Rehabilitación e inclusión con enfoque de derechos humanos", "Proceso investigativo para licenciatura I"], abre: ["Intervención interdisciplinaria en rehabilitación con perspectiva inclusiva"] },
+    { nombre: "Diagnostico interdisciplinario en rehabilitación con perspectiva inclusiva", prerequisitos: ["Rehabilitación e inclusión con enfoque de derechos humanos"], abre: ["Intervención interdisciplinaria en rehabilitación con perspectiva inclusiva"] },
     { nombre: "Evaluación y diagnostico en kinesiología cardiorrespiratorio", prerequisitos: ["Ciclo vital y funcionamiento humano", "Integración en kinesiología I"], abre: ["Intervención en kinesiología cardiorespiratoria"] },
     { nombre: "Evaluación y diagnóstico en kinesiología musculo esquelético", prerequisitos: ["Ciclo vital y funcionamiento humano", "Integración en kinesiología I"], abre: ["Intervención en kinesiología musculo esquelética"] },
     { nombre: "Evaluación y diagnostico en neurokinesiologia", prerequisitos: ["Ciclo vital y funcionamiento humano", "Integración en kinesiología I"], abre: ["Intervención en neurokinesiologia"] },
