@@ -105,8 +105,8 @@ function crearTarjeta(nombre, semestre) {
   const div = document.createElement("div");
   div.className = "ramo";
   div.textContent = nombre;
-  div.onclick = () => alternarRamo(nombre);
-  estadoRamos[nombre] = { aprobado: false, bloqueado: false, element: div };
+  div.onclick = () => aprobarRamo(nombre);
+  estadoRamos[nombre] = { aprobado: false, element: div };
   const contenedor = document.getElementById(`col-${semestre}`);
   contenedor.appendChild(div);
 }
@@ -116,7 +116,7 @@ function requisitosAprobados(nombre) {
   return prerequisitos[nombre].every(dep => estadoRamos[dep]?.aprobado);
 }
 
-function alternarRamo(nombre) {
+function aprobarRamo(nombre) {
   const ramo = estadoRamos[nombre];
   if (!ramo || ramo.bloqueado) return;
 
@@ -165,8 +165,7 @@ function crearMalla() {
     ramos[semestre].forEach(nombre => crearTarjeta(nombre, i));
   });
 
-  // Segunda pasada para bloquear según requisitos
-  Object.keys(estadoRamos).forEach(nombre => {
+Object.keys(estadoRamos).forEach(nombre => {
     if (!requisitosAprobados(nombre)) {
       estadoRamos[nombre].bloqueado = true;
       estadoRamos[nombre].element.classList.add("bloqueado");
