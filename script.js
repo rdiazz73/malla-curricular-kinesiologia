@@ -72,7 +72,7 @@ const malla = {
 const aprobados = new Set();
 
 window.onload = () => {
-  const container = document.getElementById("malla-grid");
+  const container = document.getElementById("malla-container");
   container.innerHTML = "";
 
   for (const [semestre, ramos] of Object.entries(malla)) {
