@@ -1,72 +1,75 @@
-/* Fondo general y fuente */
 body {
-  font-family: 'Segoe UI', sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #e0f7fa;
   margin: 0;
-  padding: 20px;
-  color: #004d40;
+  padding: 0;
+  color: #004d4d;
 }
 
-/* Título */
 h1 {
   text-align: center;
-  font-size: 2rem;
-  color: #006064;
-  margin-bottom: 20px;
+  padding: 20px 0;
+  color: #007c91;
+  background-color: #b2ebf2;
+  margin: 0;
+  font-size: 2em;
+  box-shadow: 0px 2px 4px rgba(0,0,0,0.1);
 }
 
-/* Contenedor de la malla */
 #malla-container {
   display: flex;
-  flex-direction: row;
-  gap: 20px;
+  flex-wrap: nowrap;
   overflow-x: auto;
-  padding: 10px;
+  padding: 20px;
+  gap: 20px;
 }
 
-/* Columna por semestre */
 .columna-semestre {
-  min-width: 250px;
-  background-color: #b2ebf2;
+  background-color: #d9f7fa;
+  border-radius: 16px;
   padding: 10px;
-  border-radius: 12px;
-  box-shadow: 0 0 10px rgba(0, 96, 100, 0.2);
+  min-width: 230px;
+  flex-shrink: 0;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Título de semestre */
 .columna-semestre h3 {
+  background-color: #80deea;
   text-align: center;
-  font-size: 1.2rem;
-  color: #007c91;
-  margin-bottom: 10px;
+  padding: 12px;
+  border-radius: 12px;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-top: 0;
+  color: #004d4d;
 }
 
-/* Cuadro de cada ramo */
 .ramo {
-  background-color: #00bcd4;
-  color: white;
+  background-color: #b2ebf2;
+  border-radius: 12px;
   padding: 10px;
-  margin-bottom: 8px;
-  border-radius: 8px;
-  font-size: 1rem;
+  margin-top: 10px;
   text-align: center;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 5px rgba(0, 188, 212, 0.4);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
-/* Ramos aprobados: tachado + azul más oscuro */
+.ramo:hover {
+  transform: scale(1.03);
+}
+
 .ramo.aprobado {
+  background-color: #4dd0e1;
+  color: white;
+  font-weight: bold;
   text-decoration: line-through;
-  background-color: #0097a7;
-  opacity: 0.8;
 }
 
-/* Ramos bloqueados: gris, sin tachar */
 .ramo.bloqueado {
-  background-color: #cfd8dc;
-  color: #757575;
+  background-color: #e0e0e0;
+  color: #888;
   cursor: not-allowed;
-  text-decoration: none;
-  opacity: 0.6;
+text-decoration: none;
 }
