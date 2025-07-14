@@ -1,156 +1,137 @@
-const ramos = {
-  "Primer año - I semestre": [
-    "Rehabilitación e inclusión con enfoque de derechos humanos",
-    "Bases químico-biológicas de la célula",
-    "Anatomía de sistemas",
-    "Corporalidad y actividad física",
-    "Fundamentos de kinesiología",
-    "Habilidades comunicativas"
+// Lista de todos los ramos organizados por semestre con sus prerrequisitos
+const malla = {
+  "1° Semestre": [
+    { nombre: "Rehabilitación e inclusión con enfoque de derechos humanos", abre: ["Diagnostico interdisciplinario en rehabilitación con perspectiva inclusiva"] },
+    { nombre: "Bases químico-biológicas de la célula", abre: ["Fisiología general y neurofisiología"] },
+    { nombre: "Anatomía de sistemas", abre: ["Anatomía sistema musculo esquelético"] },
+    { nombre: "Corporalidad y actividad física", abre: ["Desarrollo sensoriomotriz en kinesiología"] },
+    { nombre: "Fundamentos de kinesiología", abre: [] },
+    { nombre: "Habilidades comunicativas", abre: ["Pensamiento crítico"] }
   ],
-  "Primer año - II semestre": [
-    "Fisiología general y neurofisiología",
-    "Anatomía sistema musculo esquelético",
-    "Fundamentos del movimiento humano",
-    "Desarrollo sensoriomotriz en kinesiología",
-    "Inglés I"
+  "2° Semestre": [
+    { nombre: "Fisiología general y neurofisiología", prerequisitos: ["Bases químico-biológicas de la célula"], abre: ["Fisiología de sistemas"] },
+    { nombre: "Anatomía sistema musculo esquelético", prerequisitos: ["Anatomía de sistemas"], abre: [] },
+    { nombre: "Fundamentos del movimiento humano", abre: ["Kinesiología y movimiento humano"] },
+    { nombre: "Desarrollo sensoriomotriz en kinesiología", prerequisitos: ["Corporalidad y actividad física"], abre: [] },
+    { nombre: "Inglés I", abre: ["Inglés II"] }
   ],
-  "Segundo año - III semestre": [
-    "Fisiología de sistemas",
-    "Kinesiología y movimiento humano",
-    "Salud pública",
-    "Epistemología y metodología de la investigación",
-    "Inglés II"
+  "3° Semestre": [
+    { nombre: "Fisiología de sistemas", prerequisitos: ["Fisiología general y neurofisiología"], abre: ["Fisiopatología", "Fisiología del ejercicio"] },
+    { nombre: "Kinesiología y movimiento humano", prerequisitos: ["Fundamentos del movimiento humano"], abre: ["Control motor y análisis kinesiológico del movimiento humano"] },
+    { nombre: "Salud pública", abre: [] },
+    { nombre: "Epistemología y metodología de la investigación", abre: ["Análisis cualitativo y cuantitativo"] },
+    { nombre: "Inglés II", prerequisitos: ["Inglés I"], abre: ["Inglés III"] }
   ],
-  "Segundo año - IV semestre": [
-    "Fisiopatología",
-    "Control motor y análisis kinesiológico del movimiento humano",
-    "Razonamiento en kinesiología",
-    "Análisis cualitativo y cuantitativo",
-    "Inglés III"
+  "4° Semestre": [
+    { nombre: "Fisiopatología", prerequisitos: ["Fisiología de sistemas"], abre: [] },
+    { nombre: "Control motor y análisis kinesiológico del movimiento humano", prerequisitos: ["Kinesiología y movimiento humano"], abre: [] },
+    { nombre: "Razonamiento en kinesiología", abre: ["Integración en kinesiología I"] },
+    { nombre: "Análisis cualitativo y cuantitativo", prerequisitos: ["Epistemología y metodología de la investigación"], abre: ["Proceso investigativo para licenciatura I"] },
+    { nombre: "Inglés III", prerequisitos: ["Inglés II"], abre: ["Inglés IV"] }
   ],
-  "Tercer año - V semestre": [
-    "Fisiología del ejercicio",
-    "Ciclo vital y funcionamiento humano",
-    "Integración en kinesiología I",
-    "Políticas en rehabilitación e inclusión",
-    "Inglés IV"
+  "5° Semestre": [
+    { nombre: "Fisiología del ejercicio", prerequisitos: ["Fisiología de sistemas"], abre: ["Actividad física y prescripción de ejercicio para la salud"] },
+    { nombre: "Ciclo vital y funcionamiento humano", abre: ["Evaluación y diagnostico en kinesiología cardiorrespiratorio", "Evaluación y diagnostico en kinesiología musculo esquelético", "Evaluación y diagnostico en neurokinesiologia"] },
+    { nombre: "Integración en kinesiología I", prerequisitos: ["Razonamiento en kinesiología"], abre: ["Integración en kinesiología II", "Evaluación y diagnostico en kinesiología cardiorrespiratorio", "Evaluación y diagnostico en kinesiología musculo esquelético", "Evaluación y diagnostico en neurokinesiologia"] },
+    { nombre: "Políticas en rehabilitación e inclusión", abre: ["Atencion primaria y salud familiar"] },
+    { nombre: "Inglés IV", prerequisitos: ["Inglés III"], abre: [] }
   ],
-  "Tercer año - VI semestre": [
-    "Diagnostico interdisciplinario en rehabilitación con perspectiva inclusiva",
-    "Evaluación y diagnostico en kinesiología cardiorrespiratorio",
-    "Evaluación y diagnóstico en kinesiología musculo esquelético",
-    "Evaluación y diagnostico en neurokinesiologia",
-    "Atencion primaria y salud familiar",
-    "Pensamiento crítico"
+  "6° Semestre": [
+    { nombre: "Diagnostico interdisciplinario en rehabilitación con perspectiva inclusiva", prerequisitos: ["Rehabilitación e inclusión con enfoque de derechos humanos", "Proceso investigativo para licenciatura I"], abre: ["Intervención interdisciplinaria en rehabilitación con perspectiva inclusiva"] },
+    { nombre: "Evaluación y diagnostico en kinesiología cardiorrespiratorio", prerequisitos: ["Ciclo vital y funcionamiento humano", "Integración en kinesiología I"], abre: ["Intervención en kinesiología cardiorespiratoria"] },
+    { nombre: "Evaluación y diagnóstico en kinesiología musculo esquelético", prerequisitos: ["Ciclo vital y funcionamiento humano", "Integración en kinesiología I"], abre: ["Intervención en kinesiología musculo esquelética"] },
+    { nombre: "Evaluación y diagnostico en neurokinesiologia", prerequisitos: ["Ciclo vital y funcionamiento humano", "Integración en kinesiología I"], abre: ["Intervención en neurokinesiologia"] },
+    { nombre: "Atencion primaria y salud familiar", prerequisitos: ["Políticas en rehabilitación e inclusión"], abre: [] },
+    { nombre: "Pensamiento crítico", prerequisitos: ["Habilidades comunicativas", "Análisis cualitativo y cuantitativo"], abre: ["Proceso investigativo para licenciatura I"] }
   ],
-  "Cuarto año - VII semestre": [
-    "Agentes físicos",
-    "Intervención en kinesiología cardiorespiratoria",
-    "Intervención en kinesiología musculo esquelética",
-    "Intervención en neurokinesiologia",
-    "Administración y gestión en salud",
-    "Proceso investigativo para licenciatura I"
+  "7° Semestre": [
+    { nombre: "Agentes físicos", abre: [] },
+    { nombre: "Intervención en kinesiología cardiorespiratoria", prerequisitos: ["Evaluación y diagnostico en kinesiología cardiorrespiratorio"], abre: [] },
+    { nombre: "Intervención en kinesiología musculo esquelética", prerequisitos: ["Evaluación y diagnóstico en kinesiología musculo esquelético"], abre: [] },
+    { nombre: "Intervención en neurokinesiologia", prerequisitos: ["Evaluación y diagnostico en neurokinesiologia"], abre: [] },
+    { nombre: "Administración y gestión en salud", abre: [] },
+    { nombre: "Proceso investigativo para licenciatura I", prerequisitos: ["Pensamiento crítico", "Análisis cualitativo y cuantitativo"], abre: ["Proceso investigativo para licenciatura II"] }
   ],
-  "Cuarto año - VIII semestre": [
-    "Intervención interdisciplinaria en rehabilitación con perspectiva inclusiva",
-    "Actividad física y prescripción de ejercicio para la salud",
-    "Kinesiología en áreas de especialidad",
-    "Integración en kinesiología II",
-    "Proyectos, innovación y emprendimiento en kinesiología",
-    "Proyecto investigativo para licenciatura II"
+  "8° Semestre": [
+    { nombre: "Intervención interdisciplinaria en rehabilitación con perspectiva inclusiva", prerequisitos: ["Diagnostico interdisciplinario en rehabilitación con perspectiva inclusiva"], abre: [] },
+    { nombre: "Actividad física y prescripción de ejercicio para la salud", prerequisitos: ["Fisiología del ejercicio"], abre: [] },
+    { nombre: "Kinesiología en áreas de especialidad", abre: [] },
+    { nombre: "Integración en kinesiología II", prerequisitos: ["Integración en kinesiología I"], abre: [] },
+    { nombre: "Proyectos, innovación y emprendimiento en kinesiología", abre: [] },
+    { nombre: "Proyecto investigativo para licenciatura II", prerequisitos: ["Proceso investigativo para licenciatura I"], abre: [] }
   ],
-  "Quinto año": [
-    "Práctica profesional I",
-    "Práctica profesional II",
-    "Práctica profesional III",
-    "Práctica profesional IV"
+  "9° Semestre": [
+    { nombre: "Práctica profesional I", abre: [] },
+    { nombre: "Práctica profesional II", abre: [] }
+  ],
+  "10° Semestre": [
+    { nombre: "Práctica profesional III", abre: [] },
+    { nombre: "Práctica profesional IV", abre: [] }
   ]
 };
 
-const prerequisitos = {
-  "Diagnostico interdisciplinario en rehabilitación con perspectiva inclusiva": ["Rehabilitación e inclusión con enfoque de derechos humanos"],
-  "Fisiología general y neurofisiología": ["Bases químico-biológicas de la célula"],
-  "Anatomía sistema musculo esquelético": ["Anatomía de sistemas"],
-  "Desarrollo sensoriomotriz en kinesiología": ["Corporalidad y actividad física"],
-  "Pensamiento crítico": ["Habilidades comunicativas"],
-  "Fisiología de sistemas": ["Fisiología general y neurofisiología"],
-  "Kinesiología y movimiento humano": ["Fundamentos del movimiento humano"],
-  "Análisis cualitativo y cuantitativo": ["Epistemología y metodología de la investigación"],
-  "Inglés II": ["Inglés I"],
-  "Inglés III": ["Inglés II"],
-  "Inglés IV": ["Inglés III"],
-  "Fisiopatología": ["Fisiología de sistemas"],
-  "Fisiología del ejercicio": ["Fisiología de sistemas"],
-  "Control motor y análisis kinesiológico del movimiento humano": ["Kinesiología y movimiento humano"],
-  "Integración en kinesiología I": ["Razonamiento en kinesiología"],
-  "Proceso investigativo para licenciatura I": ["Pensamiento crítico", "Análisis cualitativo y cuantitativo"],
-  "Evaluación y diagnostico en kinesiología cardiorrespiratorio": ["Ciclo vital y funcionamiento humano", "Integración en kinesiología I"],
-  "Evaluación y diagnóstico en kinesiología musculo esquelético": ["Ciclo vital y funcionamiento humano", "Integración en kinesiología I"],
-  "Evaluación y diagnostico en neurokinesiologia": ["Ciclo vital y funcionamiento humano", "Integración en kinesiología I"],
-  "Intervención interdisciplinaria en rehabilitación con perspectiva inclusiva": ["Diagnostico interdisciplinario en rehabilitación con perspectiva inclusiva", "Proceso investigativo para licenciatura I"],
-  "Intervención en kinesiología cardiorespiratoria": ["Evaluación y diagnostico en kinesiología cardiorrespiratorio"],
-  "Intervención en kinesiología musculo esquelética": ["Evaluación y diagnóstico en kinesiología musculo esquelético"],
-  "Intervención en neurokinesiologia": ["Evaluación y diagnostico en neurokinesiologia"],
-  "Atencion primaria y salud familiar": ["Políticas en rehabilitación e inclusión"],
-  "Integración en kinesiología II": ["Integración en kinesiología I"],
-  "Actividad física y prescripción de ejercicio para la salud": ["Fisiología del ejercicio"],
-  "Proyecto investigativo para licenciatura II": ["Proceso investigativo para licenciatura I"]
-};
+const aprobados = new Set();
 
-const estadoRamos = {};
+window.onload = () => {
+  const container = document.getElementById("malla-container");
 
-function crearTarjeta(nombre, semestre) {
-  const div = document.createElement("div");
-  div.className = "ramo";
-  div.textContent = nombre;
-  div.onclick = () => aprobarRamo(nombre);
-  estadoRamos[nombre] = { aprobado: false, element: div };
-  const contenedor = document.getElementById(`col-${semestre}`);
-  contenedor.appendChild(div);
-}
-
-function requisitosAprobados(nombre) {
-  if (!prerequisitos[nombre]) return true;
-  return prerequisitos[nombre].every(dep => estadoRamos[dep]?.aprobado);
-}
-
-function aprobarRamo(nombre) {
-  const ramo = estadoRamos[nombre];
-  if (!ramo || ramo.bloqueado || ramo.aprobado) return;
-  ramo.aprobado = true;
-  ramo.element.classList.add("aprobado");
-
-  Object.keys(estadoRamos).forEach(r => {
-    if (prerequisitos[r] && requisitosAprobados(r)) {
-      estadoRamos[r].bloqueado = false;
-      estadoRamos[r].element.classList.remove("bloqueado");
-    }
-  });
-}
-
-function crearMalla() {
-  const mallaContainer = document.getElementById("malla-container");
-
-  Object.keys(ramos).forEach((semestre, i) => {
-    const col = document.createElement("div");
-    col.className = "columna-semestre";
-    col.id = `col-${i}`;
+  for (const [semestre, ramos] of Object.entries(malla)) {
+    const columna = document.createElement("div");
+    columna.className = "columna-semestre";
 
     const titulo = document.createElement("h3");
     titulo.textContent = semestre;
-    col.appendChild(titulo);
-    mallaContainer.appendChild(col); // << IMPORTANTE: primero agregamos la columna al DOM
+    columna.appendChild(titulo);
 
-    ramos[semestre].forEach(nombre => crearTarjeta(nombre, i));
-  });
+    ramos.forEach(ramo => {
+      const div = document.createElement("div");
+      div.className = "ramo";
+      div.textContent = ramo.nombre;
+      div.dataset.nombre = ramo.nombre;
 
-  // Segunda pasada: bloqueo por requisitos
-  Object.keys(estadoRamos).forEach(nombre => {
-    if (!requisitosAprobados(nombre)) {
-      estadoRamos[nombre].bloqueado = true;
-      estadoRamos[nombre].element.classList.add("bloqueado");
+      // Verificamos si debe estar bloqueado
+      if (ramo.prerequisitos && ramo.prerequisitos.length > 0 && !ramo.prerequisitos.every(req => aprobados.has(req))) {
+        div.classList.add("bloqueado");
+      }
+
+      div.addEventListener("click", () => {
+        if (div.classList.contains("bloqueado")) return;
+
+        const aprobado = div.classList.toggle("aprobado");
+        if (aprobado) {
+          aprobados.add(ramo.nombre);
+        } else {
+          aprobados.delete(ramo.nombre);
+        }
+
+        actualizarBloqueos();
+      });
+
+      columna.appendChild(div);
+    });
+
+    container.appendChild(columna);
+  }
+};
+
+function actualizarBloqueos() {
+  document.querySelectorAll(".ramo").forEach(div => {
+    const nombre = div.dataset.nombre;
+    let prerequisites = [];
+
+    for (const ramos of Object.values(malla)) {
+      const ramo = ramos.find(r => r.nombre === nombre);
+      if (ramo && ramo.prerequisitos) prerequisites = ramo.prerequisitos;
+    }
+
+    const todosCumplidos = prerequisites.every(req => aprobados.has(req));
+
+    if (todosCumplidos) {
+      div.classList.remove("bloqueado");
+    } else {
+      div.classList.add("bloqueado");
+      div.classList.remove("aprobado");
+      aprobados.delete(nombre);
     }
   });
 }
-
-window.onload = crearMalla;
