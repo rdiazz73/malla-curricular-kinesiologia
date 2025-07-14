@@ -13,14 +13,16 @@
         <div class="controls">
             <button id="reset-btn">Reiniciar Todo</button>
             <div class="progress-container">
-                <div class="progress-bar" id="progress-bar"></div>
+                <div class="progress-bar" id="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
                 <span id="progress-text">0% completado</span>
             </div>
         </div>
     </header>
 
     <main>
-        <div class="semesters-container">
+        <div class="semesters-container" id="semesters-container">
             <!-- Los semestres se generarán dinámicamente con JavaScript -->
         </div>
     </main>
@@ -39,6 +41,7 @@
                     <h3>Desbloquea:</h3>
                     <ul id="modal-unlocks"></ul>
                 </div>
+                <button class="complete-btn" id="complete-btn">Marcar como aprobado</button>
             </div>
         </div>
     </div>
