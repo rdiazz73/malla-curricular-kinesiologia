@@ -118,36 +118,16 @@ function requisitosAprobados(nombre) {
 
 function aprobarRamo(nombre) {
   const ramo = estadoRamos[nombre];
-  if (!ramo || ramo.bloqueado) return;
+  if (!ramo || ramo.bloqueado || ramo.aprobado) return;
+  ramo.aprobado = true;
+  ramo.element.classList.add("aprobado");
 
-  // Si ya estaba aprobado → lo desmarca
-  if (ramo.aprobado) {
-    ramo.aprobado = false;
-    ramo.element.classList.remove("aprobado");
-
-    // Bloquear los que dependían de este
-    Object.keys(estadoRamos).forEach(r => {
-      if (prerequisitos[r]?.includes(nombre) && !requisitosAprobados(r)) {
-        estadoRamos[r].bloqueado = true;
-        estadoRamos[r].aprobado = false;
-        estadoRamos[r].element.classList.add("bloqueado");
-        estadoRamos[r].element.classList.remove("aprobado");
-      }
-    });
-  } else {
-    // Aprobar si tiene requisitos cumplidos
-    if (!requisitosAprobados(nombre)) return;
-    ramo.aprobado = true;
-    ramo.element.classList.add("aprobado");
-
-    // Desbloquear los que ahora tienen requisitos cumplidos
-    Object.keys(estadoRamos).forEach(r => {
-      if (estadoRamos[r].bloqueado && requisitosAprobados(r)) {
-        estadoRamos[r].bloqueado = false;
-        estadoRamos[r].element.classList.remove("bloqueado");
-      }
-    });
-  }
+  Object.keys(estadoRamos).forEach(r => {
+    if (prerequisitos[r] && requisitosAprobados(r)) {
+      estadoRamos[r].bloqueado = false;
+      estadoRamos[r].element.classList.remove("bloqueado");
+    }
+  });
 }
 
 function crearMalla() {
@@ -165,7 +145,7 @@ function crearMalla() {
     ramos[semestre].forEach(nombre => crearTarjeta(nombre, i));
   });
 
-Object.keys(estadoRamos).forEach(nombre => {
+  Object.keys(estadoRamos).forEach(nombre => {
     if (!requisitosAprobados(nombre)) {
       estadoRamos[nombre].bloqueado = true;
       estadoRamos[nombre].element.classList.add("bloqueado");
