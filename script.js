@@ -115,10 +115,42 @@ function requisitosAprobados(nombre) {
 }
 
 function aprobarRamo(nombre) {
+  function aprobarRamo(nombre) {
   const ramo = estadoRamos[nombre];
-  if (!ramo || ramo.bloqueado || ramo.aprobado) return;
-  ramo.aprobado = true;
-  ramo.element.classList.add("aprobado");
+  if (!ramo || ramo.bloqueado) return;
+
+  // Toggle entre aprobado y no aprobado
+  if (ramo.aprobado) {
+    ramo.aprobado = false;
+    ramo.element.classList.remove("aprobado");
+
+    // Re-bloquear todos los ramos que dependían de este
+    Object.keys(estadoRamos).forEach(r => {
+      if (prerequisitos[r]?.includes(nombre)) {
+        if (!requisitosAprobados(r)) {
+          estadoRamos[r].bloqueado = true;
+          estadoRamos[r].element.classList.add("bloqueado");
+          estadoRamos[r].element.classList.remove("aprobado");
+          estadoRamos[r].aprobado = false;
+        }
+      }
+    });
+  } else {
+    // Solo aprobar si tiene requisitos cumplidos
+    if (!requisitosAprobados(nombre)) return;
+
+    ramo.aprobado = true;
+    ramo.element.classList.add("aprobado");
+
+    // Desbloquear ramos que dependían de este
+    Object.keys(estadoRamos).forEach(r => {
+      if (estadoRamos[r].bloqueado && requisitosAprobados(r)) {
+        estadoRamos[r].bloqueado = false;
+        estadoRamos[r].element.classList.remove("bloqueado");
+      }
+    });
+  }
+}
 
   Object.keys(estadoRamos).forEach(r => {
     if (prerequisitos[r] && requisitosAprobados(r)) {
