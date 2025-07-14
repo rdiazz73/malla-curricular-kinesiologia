@@ -135,16 +135,14 @@ function crearMalla() {
     const col = document.createElement("div");
     col.className = "columna-semestre";
     col.id = `col-${i}`;
-
     const titulo = document.createElement("h3");
     titulo.textContent = semestre;
     col.appendChild(titulo);
-    mallaContainer.appendChild(col); // << IMPORTANTE: primero agregamos la columna al DOM
+    mallaContainer.appendChild(col);
 
     ramos[semestre].forEach(nombre => crearTarjeta(nombre, i));
   });
 
-  // Segunda pasada: bloqueo por requisitos
   Object.keys(estadoRamos).forEach(nombre => {
     if (!requisitosAprobados(nombre)) {
       estadoRamos[nombre].bloqueado = true;
