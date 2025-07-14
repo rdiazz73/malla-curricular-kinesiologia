@@ -1,5 +1,5 @@
 const ramos = {
-  "Primer año - I semestre": [
+  "I semestre": [
     "Rehabilitación e inclusión con enfoque de derechos humanos",
     "Bases químico-biológicas de la célula",
     "Anatomía de sistemas",
@@ -7,35 +7,35 @@ const ramos = {
     "Fundamentos de kinesiología",
     "Habilidades comunicativas"
   ],
-  "Primer año - II semestre": [
+  "II semestre": [
     "Fisiología general y neurofisiología",
     "Anatomía sistema musculo esquelético",
     "Fundamentos del movimiento humano",
     "Desarrollo sensoriomotriz en kinesiología",
     "Inglés I"
   ],
-  "Segundo año - III semestre": [
+  "III semestre": [
     "Fisiología de sistemas",
     "Kinesiología y movimiento humano",
     "Salud pública",
     "Epistemología y metodología de la investigación",
     "Inglés II"
   ],
-  "Segundo año - IV semestre": [
+  "IV semestre": [
     "Fisiopatología",
     "Control motor y análisis kinesiológico del movimiento humano",
     "Razonamiento en kinesiología",
     "Análisis cualitativo y cuantitativo",
     "Inglés III"
   ],
-  "Tercer año - V semestre": [
+  "V semestre": [
     "Fisiología del ejercicio",
     "Ciclo vital y funcionamiento humano",
     "Integración en kinesiología I",
     "Políticas en rehabilitación e inclusión",
     "Inglés IV"
   ],
-  "Tercer año - VI semestre": [
+  "VI semestre": [
     "Diagnostico interdisciplinario en rehabilitación con perspectiva inclusiva",
     "Evaluación y diagnostico en kinesiología cardiorrespiratorio",
     "Evaluación y diagnóstico en kinesiología musculo esquelético",
@@ -43,7 +43,7 @@ const ramos = {
     "Atencion primaria y salud familiar",
     "Pensamiento crítico"
   ],
-  "Cuarto año - VII semestre": [
+  "VII semestre": [
     "Agentes físicos",
     "Intervención en kinesiología cardiorespiratoria",
     "Intervención en kinesiología musculo esquelética",
@@ -51,7 +51,7 @@ const ramos = {
     "Administración y gestión en salud",
     "Proceso investigativo para licenciatura I"
   ],
-  "Cuarto año - VIII semestre": [
+  "VIII semestre": [
     "Intervención interdisciplinaria en rehabilitación con perspectiva inclusiva",
     "Actividad física y prescripción de ejercicio para la salud",
     "Kinesiología en áreas de especialidad",
@@ -59,9 +59,11 @@ const ramos = {
     "Proyectos, innovación y emprendimiento en kinesiología",
     "Proyecto investigativo para licenciatura II"
   ],
-  "Quinto año": [
+  "XI semestre": [
     "Práctica profesional I",
     "Práctica profesional II",
+  ],
+  "X semestre": [
     "Práctica profesional III",
     "Práctica profesional IV"
   ]
@@ -103,8 +105,8 @@ function crearTarjeta(nombre, semestre) {
   const div = document.createElement("div");
   div.className = "ramo";
   div.textContent = nombre;
-  div.onclick = () => aprobarRamo(nombre);
-  estadoRamos[nombre] = { aprobado: false, element: div };
+  div.onclick = () => alternarRamo(nombre);
+  estadoRamos[nombre] = { aprobado: false, bloqueado: false, element: div };
   const contenedor = document.getElementById(`col-${semestre}`);
   contenedor.appendChild(div);
 }
@@ -114,35 +116,31 @@ function requisitosAprobados(nombre) {
   return prerequisitos[nombre].every(dep => estadoRamos[dep]?.aprobado);
 }
 
-function aprobarRamo(nombre) {
-  function aprobarRamo(nombre) {
+function alternarRamo(nombre) {
   const ramo = estadoRamos[nombre];
   if (!ramo || ramo.bloqueado) return;
 
-  // Toggle entre aprobado y no aprobado
+  // Si ya estaba aprobado → lo desmarca
   if (ramo.aprobado) {
     ramo.aprobado = false;
     ramo.element.classList.remove("aprobado");
 
-    // Re-bloquear todos los ramos que dependían de este
+    // Bloquear los que dependían de este
     Object.keys(estadoRamos).forEach(r => {
-      if (prerequisitos[r]?.includes(nombre)) {
-        if (!requisitosAprobados(r)) {
-          estadoRamos[r].bloqueado = true;
-          estadoRamos[r].element.classList.add("bloqueado");
-          estadoRamos[r].element.classList.remove("aprobado");
-          estadoRamos[r].aprobado = false;
-        }
+      if (prerequisitos[r]?.includes(nombre) && !requisitosAprobados(r)) {
+        estadoRamos[r].bloqueado = true;
+        estadoRamos[r].aprobado = false;
+        estadoRamos[r].element.classList.add("bloqueado");
+        estadoRamos[r].element.classList.remove("aprobado");
       }
     });
   } else {
-    // Solo aprobar si tiene requisitos cumplidos
+    // Aprobar si tiene requisitos cumplidos
     if (!requisitosAprobados(nombre)) return;
-
     ramo.aprobado = true;
     ramo.element.classList.add("aprobado");
 
-    // Desbloquear ramos que dependían de este
+    // Desbloquear los que ahora tienen requisitos cumplidos
     Object.keys(estadoRamos).forEach(r => {
       if (estadoRamos[r].bloqueado && requisitosAprobados(r)) {
         estadoRamos[r].bloqueado = false;
@@ -150,14 +148,6 @@ function aprobarRamo(nombre) {
       }
     });
   }
-}
-
-  Object.keys(estadoRamos).forEach(r => {
-    if (prerequisitos[r] && requisitosAprobados(r)) {
-      estadoRamos[r].bloqueado = false;
-      estadoRamos[r].element.classList.remove("bloqueado");
-    }
-  });
 }
 
 function crearMalla() {
@@ -175,6 +165,7 @@ function crearMalla() {
     ramos[semestre].forEach(nombre => crearTarjeta(nombre, i));
   });
 
+  // Segunda pasada para bloquear según requisitos
   Object.keys(estadoRamos).forEach(nombre => {
     if (!requisitosAprobados(nombre)) {
       estadoRamos[nombre].bloqueado = true;
