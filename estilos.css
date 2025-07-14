@@ -1,99 +1,74 @@
 body {
-  font-family: 'Segoe UI', sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #e0f7fa;
-  color: #004d40;
   margin: 0;
-  padding: 20px;
-  overflow-x: auto;
+  padding: 0;
+  color: #004d4d;
 }
 
 h1 {
   text-align: center;
-  color: #006064;
-  margin-bottom: 10px;
-}
-
-.leyenda {
-  text-align: center;
-  margin: 20px 0;
-}
-
-.leyenda .color-box {
-  display: inline-flex;
-  align-items: center;
-  margin: 0 10px;
-}
-
-.leyenda .cuadro {
-  width: 20px;
-  height: 20px;
-  margin-right: 5px;
-  border-radius: 4px;
-  display: inline-block;
+  padding: 20px 0;
+  color: #007c91;
+  background-color: #b2ebf2;
+  margin: 0;
+  font-size: 2em;
+  box-shadow: 0px 2px 4px rgba(0,0,0,0.1);
 }
 
 .malla-grid {
   display: flex;
-  flex-direction: row;
-  gap: 20px;
+  flex-wrap: nowrap;
   overflow-x: auto;
   padding: 20px;
-  scroll-behavior: smooth;
+  gap: 20px;
 }
 
 .columna-semestre {
-  min-width: 220px;
-  background-color: #f0fbfc;
-  border-radius: 12px;
-  padding: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #d9f7fa;
+  border-radius: 16px;
+  padding: 10px;
+  min-width: 230px;
   flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  border: 2px solid #a1eaf5;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
 }
 
 .columna-semestre h3 {
+  background-color: #80deea;
   text-align: center;
-  background-color: #a1eaf5;
-  color: #005e73;
-  padding: 8px;
-  border-radius: 8px;
-  margin: 0 0 10px;
-  font-size: 1.1rem;
+  padding: 12px;
+  border-radius: 12px;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-top: 0;
+  color: #004d4d;
 }
 
 .ramo {
-  background-color: #d4f1f4;
-  border-left: 5px solid #189ab4;
-  border-radius: 14px;
-  padding: 12px;
-  box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
+  background-color: #b2ebf2;
+  border-radius: 12px;
+  padding: 10px;
+  margin-top: 10px;
+  text-align: center;
   cursor: pointer;
-  transition: transform 0.3s ease, background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
   font-weight: 500;
-  transform-style: preserve-3d;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
 .ramo:hover {
-  background-color: #b0eaf0;
-  transform: perspective(500px) rotateY(5deg);
+  transform: scale(1.03);
 }
 
 .ramo.aprobado {
-  background-color: #75e6da;
-  border-left: 5px solid #05445e;
-  color: #00334e;
-  text-decoration: line-through;
-  transform: perspective(500px) rotateY(-5deg);
+  background-color: #4dd0e1;
+  color: white;
+  font-weight: bold;
 }
 
 .ramo.bloqueado {
-  opacity: 0.4;
-  pointer-events: none;
+  background-color: #e0e0e0;
+  color: #888;
+  cursor: not-allowed;
+  text-decoration: line-through;
 }
-
-  .columna-semestre {
-    min-width: 180px;
-  }
