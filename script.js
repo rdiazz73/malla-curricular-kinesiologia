@@ -1,5 +1,5 @@
 const ramos = {
-  "I semestre": [
+  "Primer año - I semestre": [
     "Rehabilitación e inclusión con enfoque de derechos humanos",
     "Bases químico-biológicas de la célula",
     "Anatomía de sistemas",
@@ -7,35 +7,35 @@ const ramos = {
     "Fundamentos de kinesiología",
     "Habilidades comunicativas"
   ],
-  "II semestre": [
+  "Primer año - II semestre": [
     "Fisiología general y neurofisiología",
     "Anatomía sistema musculo esquelético",
     "Fundamentos del movimiento humano",
     "Desarrollo sensoriomotriz en kinesiología",
     "Inglés I"
   ],
-  "III semestre": [
+  "Segundo año - III semestre": [
     "Fisiología de sistemas",
     "Kinesiología y movimiento humano",
     "Salud pública",
     "Epistemología y metodología de la investigación",
     "Inglés II"
   ],
-  "IV semestre": [
+  "Segundo año - IV semestre": [
     "Fisiopatología",
     "Control motor y análisis kinesiológico del movimiento humano",
     "Razonamiento en kinesiología",
     "Análisis cualitativo y cuantitativo",
     "Inglés III"
   ],
-  "V semestre": [
+  "Tercer año - V semestre": [
     "Fisiología del ejercicio",
     "Ciclo vital y funcionamiento humano",
     "Integración en kinesiología I",
     "Políticas en rehabilitación e inclusión",
     "Inglés IV"
   ],
-  "VI semestre": [
+  "Tercer año - VI semestre": [
     "Diagnostico interdisciplinario en rehabilitación con perspectiva inclusiva",
     "Evaluación y diagnostico en kinesiología cardiorrespiratorio",
     "Evaluación y diagnóstico en kinesiología musculo esquelético",
@@ -43,7 +43,7 @@ const ramos = {
     "Atencion primaria y salud familiar",
     "Pensamiento crítico"
   ],
-  "VII semestre": [
+  "Cuarto año - VII semestre": [
     "Agentes físicos",
     "Intervención en kinesiología cardiorespiratoria",
     "Intervención en kinesiología musculo esquelética",
@@ -51,7 +51,7 @@ const ramos = {
     "Administración y gestión en salud",
     "Proceso investigativo para licenciatura I"
   ],
-  "VIII semestre": [
+  "Cuarto año - VIII semestre": [
     "Intervención interdisciplinaria en rehabilitación con perspectiva inclusiva",
     "Actividad física y prescripción de ejercicio para la salud",
     "Kinesiología en áreas de especialidad",
@@ -59,11 +59,9 @@ const ramos = {
     "Proyectos, innovación y emprendimiento en kinesiología",
     "Proyecto investigativo para licenciatura II"
   ],
-  "XI semestre": [
+  "Quinto año": [
     "Práctica profesional I",
     "Práctica profesional II",
-  ],
-  "X semestre": [
     "Práctica profesional III",
     "Práctica profesional IV"
   ]
