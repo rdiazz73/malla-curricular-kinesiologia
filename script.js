@@ -89,7 +89,10 @@ window.onload = () => {
       div.textContent = ramo.nombre;
       div.dataset.nombre = ramo.nombre;
 
-      if (ramo.prerequisitos && !ramo.prerequisitos.every(req => aprobados.has(req))) {
+      const prereqs = ramo.prerequisitos || [];
+      const cumplePrerequisitos = prereqs.every(req => aprobados.has(req));
+
+      if (!cumplePrerequisitos) {
         div.classList.add("bloqueado");
       }
 
@@ -118,15 +121,14 @@ window.onload = () => {
 function actualizarBloqueos() {
   document.querySelectorAll(".ramo").forEach(div => {
     const nombre = div.dataset.nombre;
-    let prerequisitos = [];
 
+    let ramo;
     for (const ramos of Object.values(malla)) {
-      const ramo = ramos.find(r => r.nombre === nombre);
-      if (ramo && ramo.prerequisitos) {
-        prerequisitos = ramo.prerequisitos;
-      }
+      ramo = ramos.find(r => r.nombre === nombre);
+      if (ramo) break;
     }
 
+    const prerequisitos = ramo?.prerequisitos || [];
     const todosCumplidos = prerequisitos.every(req => aprobados.has(req));
 
     if (todosCumplidos) {
