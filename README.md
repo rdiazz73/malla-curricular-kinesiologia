@@ -1,1 +1,1 @@
-# malla-curricular-kinesiologia
+# malla-interactiva-kinesiologia-unab
